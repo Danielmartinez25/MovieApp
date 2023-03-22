@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Youtube from "react-youtube";
 import "./App.css";
@@ -28,14 +28,25 @@ function App() {
         query: searchKey,
       },
     });
+    setMovies(result);
+    setMovie(result[0]);
+  }
+  useEffect(() =>{
+    fetchMovies();
+  },[])
+  return (
+  <div className="container mt-3">
+    <div className="row">
+    {movie.mop((movie)=>(
+      <div key={movie.id} className="col-md-4 mb-3">
+        <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height={600} width="100"/>
+        <h4 className="text-center">{movie.title}</h4>
+      </div>
+    ))}
 
-    
-  };
-    setMovies(results);
-    setMovie(results[0]);
-  return <div>
-
-  </div>;
+    </div>
+  </div>
+  ) 
 }
 
 export default App;
